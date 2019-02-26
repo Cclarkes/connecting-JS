@@ -12,7 +12,13 @@ client.connect((err, db) => {
 });
 
 function listPeople(db) {
+    console.log("Searching...");
     db.query("SELECT * FROM famous_people WHERE first_name LIKE '" + firstEntry + "'", (err, res) => {
-        console.log(res.rows);
-    })
-}
+        for(person of res.rows) {
+            console.log("Found " + ((res.rows).length) + " person(s) by the name '" + firstEntry + "':");
+            console.log("- " + (res.rows).length + ": " + person.first_name + " " + person.last_name + ", born "
+            + (person.birthdate).toISOString().substring(0, 10));
+            db.end();
+        }
+        })
+    }
