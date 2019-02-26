@@ -8,8 +8,11 @@ client.connect((err, db) => {
     if(err) {
         console.error(("Connection Error"), err);
     }
-    console.log("hello");
+    listPeople(db);
+});
+
+function listPeople(db) {
     db.query("SELECT * FROM famous_people WHERE first_name LIKE '" + firstEntry + "'", (err, res) => {
         console.log(res.rows);
     })
-});
+}
